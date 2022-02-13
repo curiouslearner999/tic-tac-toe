@@ -1,0 +1,40 @@
+body {
+    background-color: aliceblue;
+    font-size: 30px;
+    font-family: Redressed;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+#gameboard {
+    background-color: pink;
+    height:  500px;
+    width: 500px;
+    margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid #000;
+    
+} 
+.board-cell {
+    background-color:pink;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #000;
+}
+
+#reset-container {
+    display: flex;
+    margin: 20px auto 0;
+    justify-content: center;
+
+}
+#resetButton {
+    width: 100px;
+    height: 30px;
+    font-family: Redressed;
+}

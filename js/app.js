@@ -12,9 +12,4 @@ const winningSequences = [
     [2, 4, 6]
   ];
 
-  function addCellClickListener() {
-    const cells = document.querySelectorAll('.boardCell');
-    cells.forEach( cell => {
-      cell.addEventListener('click', makeMove);
-    });
-  }
+  

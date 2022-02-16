@@ -1,6 +1,6 @@
 
 const gameBoard = document.querySelector("#gameBoard")
-const boardCells = document.querySelectorAll('boardCell')
+const boardCells = document.querySelectorAll('.boardCell')
 //identify the reset button
 const resetButton = document.querySelector('#resetButton')
 

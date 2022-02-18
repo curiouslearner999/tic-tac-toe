@@ -1,11 +1,9 @@
 
-const gameBoard = document.querySelector("#gameBoard")
+const gameBoard = document.querySelector('#gameBoard')
 const boardCells = document.querySelectorAll('boardCell')
 
 //identify the reset button
 const resetButton = document.querySelector('#resetButton')
-
-// let boardArr =[]
 
 let box1 = document.getElementById('box1')
 let box2 = document.getElementById('box2')
@@ -22,37 +20,32 @@ let message = document.getElementById ('message')
 let currentPlayer ='X'
 let turn = 0
 let winnerFound = false
-// let winner = ""
-
 
 
 const makeMove = (event) => {
-    if (event.target.innerText === "") {
-    event.target.innerText = currentPlayer;
-    console.log(currentPlayer)
-    // boardArr.push(currentPlayer)
-    // console.log(boardArr)
-    turn++
+   
+    if (event.target.innerText === '') {
+        event.target.innerText = currentPlayer
+        turn++
     } 
 
     // Invokes checkWinner() to see if there is a winner, if not, switches players & displays next player
-    if (currentPlayer === "X") {
-        checkWinner();
-        
-        currentPlayer = "O";
-       
-        console.log(message.innerText  = `Player ${currentPlayer}: Please make your selection`)
+    if (currentPlayer === 'X') {
+        checkWinner()
+        currentPlayer = 'O'
+        message.innerText  = `Player ${currentPlayer}: Please make your selection`
 
        } else{
-            checkWinner()
-           currentPlayer = "X"
+           checkWinner()
+           currentPlayer = 'X'
            message.innerText  = `Player ${currentPlayer}: Please make your selection`
        }
     }
 
         
-   const checkWinner = () => {
-        // Winning combos
+const checkWinner = () => {
+    
+    // Winning combos
         let combo1 = [box1.innerText,box2.innerText,box3.innerText]
         let combo2 = [box4.innerText,box5.innerText,box6.innerText]
         let combo3 = [box7.innerText,box8.innerText,box9.innerText]
@@ -65,38 +58,42 @@ const makeMove = (event) => {
 
         // Checks if there is a winning combo
         for (let i = 0; i < winnerCombos.length; i++) {
-            if (winnerCombos[i].join("") === "XXX" || winnerCombos[i].join("") === "OOO") {
+            if (winnerCombos[i].join('') === 'XXX' || winnerCombos[i].join('') === 'OOO') {
                 winnerFound = true
-                console.log(message.innerText)
-                endGame(currentPlayer)
+                
+                endGame()
             }
 
         }
         // Checks if there is a tie
         if (turn > 7 && winnerFound === false) {
-            message.innerText="It's a tie!"
-            console.log(message.innerText)
-            endGame(currentPlayer)
+            message.innerText = 'It is a tie!'
+            
+            endGame()
         }
 
 }
     
-    // Removes eventlisteners once game is over
-    const endGame = () => {
-        box1.removeEventListener('click', makeMove)
-        box2.removeEventListener('click', makeMove)
-        box3.removeEventListener('click', makeMove)
-        box4.removeEventListener('click', makeMove)
-        box5.removeEventListener('click', makeMove)
-        box6.removeEventListener('click', makeMove)
-        box7.removeEventListener('click', makeMove)
-        box8.removeEventListener('click', makeMove)
-        box9.removeEventListener('click', makeMove)
-        console.log('Game Over')
-        message.innerText =`Player ${currentPlayer} is the winner!`
-    }
+// Removes eventlisteners once game is over
+const endGame = () => {
+    
+    box1.removeEventListener('click', makeMove)
+    box2.removeEventListener('click', makeMove)
+    box3.removeEventListener('click', makeMove)
+    box4.removeEventListener('click', makeMove)
+    box5.removeEventListener('click', makeMove)
+    box6.removeEventListener('click', makeMove)
+    box7.removeEventListener('click', makeMove)
+    box8.removeEventListener('click', makeMove)
+    box9.removeEventListener('click', makeMove)
+        
+}
+
+// Restarts the game    
+
 resetButton.addEventListener('click',()=>{
-    currentPlayer = "X"
+    
+    currentPlayer = 'X'
     winnerFound = false
     turn = 0
     box1.addEventListener('click', makeMove)
@@ -109,24 +106,25 @@ resetButton.addEventListener('click',()=>{
     box8.addEventListener('click', makeMove)
     box9.addEventListener('click', makeMove)
 
+    box1.innerText = ''
+    box2.innerText = ''
+    box3.innerText = ''
+    box4.innerText = ''
+    box5.innerText = ''
+    box6.innerText = ''
+    box7.innerText = ''
+    box8.innerText = ''
+    box9.innerText = ''
+    message.innerText  = `Player ${currentPlayer}: Please make your selection`
+
 })    
-    // const startGame = () => {
-    //     box1.addEventListener('click', makeMove)
-    //     box2.addEventListener('click', makeMove)
-    //     box3.addEventListener('click', makeMove)
-    //     box4.addEventListener('click', makeMove)
-    //     box5.addEventListener('click', makeMove)
-    //     box6.addEventListener('click', makeMove)
-    //     box7.addEventListener('click', makeMove)
-    //     box8.addEventListener('click', makeMove)
-    //     box9.addEventListener('click', makeMove)
-    // }
-box1.addEventListener('click', makeMove)
-box2.addEventListener('click', makeMove)
-box3.addEventListener('click', makeMove)
-box4.addEventListener('click', makeMove)
-box5.addEventListener('click', makeMove)
-box6.addEventListener('click', makeMove)
-box7.addEventListener('click', makeMove)
-box8.addEventListener('click', makeMove)
-box9.addEventListener('click', makeMove)
+    
+    box1.addEventListener('click', makeMove)
+    box2.addEventListener('click', makeMove)
+    box3.addEventListener('click', makeMove)
+    box4.addEventListener('click', makeMove)
+    box5.addEventListener('click', makeMove)
+    box6.addEventListener('click', makeMove)
+    box7.addEventListener('click', makeMove)
+    box8.addEventListener('click', makeMove)
+    box9.addEventListener('click', makeMove)

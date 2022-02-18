@@ -66,7 +66,7 @@ const checkWinner = () => {
 
         }
         // Checks if there is a tie
-        if (turn > 7 && winnerFound === false) {
+        if (turn >=9  && winnerFound === false) {
             message.innerText = 'It is a tie!'
             
             endGame()

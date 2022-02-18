@@ -1,9 +1,11 @@
 
 const gameBoard = document.querySelector("#gameBoard")
-const boardCells = document.querySelectorAll('.boardCell')
+const boardCells = document.querySelectorAll('boardCell')
+
 //identify the reset button
 const resetButton = document.querySelector('#resetButton')
 
+// let boardArr =[]
 
 let box1 = document.getElementById('box1')
 let box2 = document.getElementById('box2')
@@ -15,43 +17,116 @@ let box7 = document.getElementById('box7')
 let box8 = document.getElementById('box8')
 let box9 = document.getElementById('box9')
 
-let currenPlayer ='X'
+let message = document.getElementById ('message')
+
+let currentPlayer ='X'
 let turn = 0
-let gameActive = false
+let winnerFound = false
+// let winner = ""
 
 
-const startGame = () => {
-    boardCells.forEach(cell =>{
-        cell.addEventListener('click',makeMove)
-    })
-}
-
-startGame()
 
 const makeMove = (event) => {
-    if (event.target.innerHTML!=="") return;
-    event.target.innerHTML=currentPlayer;
-    turn++;
-
+    if (event.target.innerText === "") {
+    event.target.innerText = currentPlayer;
+    console.log(currentPlayer)
+    // boardArr.push(currentPlayer)
+    // console.log(boardArr)
+    turn++
+    } 
 
     // Invokes checkWinner() to see if there is a winner, if not, switches players & displays next player
-    if (currentPlayer==="x") {
-        e.target.classList.add("X_CLASS");
+    if (currentPlayer === "X") {
         checkWinner();
-        if (winnerFound===true) return;
-        currentPlayer="o";
-        message.innerHTML="Player O: Please make your selection";
+        
+        currentPlayer = "O";
+       
+        console.log(message.innerText  = `Player ${currentPlayer}: Please make your selection`)
 
+       } else{
+            checkWinner()
+           currentPlayer = "X"
+           message.innerText  = `Player ${currentPlayer}: Please make your selection`
        }
     }
 
-    else if (currentPlayer==="o"&&playerTwo==="player") {
-        e.target.classList.add("O_CLASS");
-        checkWinner();
-        if (winnerFound===true) return;
-        currentPlayer="x";
-        message.innerHTML="Player X: Please make your selection";
+        
+   const checkWinner = () => {
+        // Winning combos
+        let combo1 = [box1.innerText,box2.innerText,box3.innerText]
+        let combo2 = [box4.innerText,box5.innerText,box6.innerText]
+        let combo3 = [box7.innerText,box8.innerText,box9.innerText]
+        let combo4 = [box1.innerText,box4.innerText,box7.innerText]
+        let combo5 = [box2.innerText,box5.innerText,box8.innerText]
+        let combo6 = [box3.innerText,box6.innerText,box9.innerText]
+        let combo7 = [box1.innerText,box5.innerText,box9.innerText]
+        let combo8 = [box3.innerText,box5.innerText,box7.innerText]
+        let winnerCombos = [combo1,combo2,combo3,combo4,combo5,combo6,combo7,combo8]
 
-    }
-    
+        // Checks if there is a winning combo
+        for (let i = 0; i < winnerCombos.length; i++) {
+            if (winnerCombos[i].join("") === "XXX" || winnerCombos[i].join("") === "OOO") {
+                winnerFound = true
+                console.log(message.innerText)
+                endGame(currentPlayer)
+            }
+
+        }
+        // Checks if there is a tie
+        if (turn > 7 && winnerFound === false) {
+            message.innerText="It's a tie!"
+            console.log(message.innerText)
+            endGame(currentPlayer)
+        }
+
 }
+    
+    // Removes eventlisteners once game is over
+    const endGame = () => {
+        box1.removeEventListener('click', makeMove)
+        box2.removeEventListener('click', makeMove)
+        box3.removeEventListener('click', makeMove)
+        box4.removeEventListener('click', makeMove)
+        box5.removeEventListener('click', makeMove)
+        box6.removeEventListener('click', makeMove)
+        box7.removeEventListener('click', makeMove)
+        box8.removeEventListener('click', makeMove)
+        box9.removeEventListener('click', makeMove)
+        console.log('Game Over')
+        message.innerText =`Player ${currentPlayer} is the winner!`
+    }
+resetButton.addEventListener('click',()=>{
+    currentPlayer = "X"
+    winnerFound = false
+    turn = 0
+    box1.addEventListener('click', makeMove)
+    box2.addEventListener('click', makeMove)
+    box3.addEventListener('click', makeMove)
+    box4.addEventListener('click', makeMove)
+    box5.addEventListener('click', makeMove)
+    box6.addEventListener('click', makeMove)
+    box7.addEventListener('click', makeMove)
+    box8.addEventListener('click', makeMove)
+    box9.addEventListener('click', makeMove)
+
+})    
+    // const startGame = () => {
+    //     box1.addEventListener('click', makeMove)
+    //     box2.addEventListener('click', makeMove)
+    //     box3.addEventListener('click', makeMove)
+    //     box4.addEventListener('click', makeMove)
+    //     box5.addEventListener('click', makeMove)
+    //     box6.addEventListener('click', makeMove)
+    //     box7.addEventListener('click', makeMove)
+    //     box8.addEventListener('click', makeMove)
+    //     box9.addEventListener('click', makeMove)
+    // }
+box1.addEventListener('click', makeMove)
+box2.addEventListener('click', makeMove)
+box3.addEventListener('click', makeMove)
+box4.addEventListener('click', makeMove)
+box5.addEventListener('click', makeMove)
+box6.addEventListener('click', makeMove)
+box7.addEventListener('click', makeMove)
+box8.addEventListener('click', makeMove)
+box9.addEventListener('click', makeMove)
